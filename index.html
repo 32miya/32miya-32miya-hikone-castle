@@ -2376,7 +2376,7 @@ const TFLOORS={modern:[
   {lv:2,name:'天守 3階（最上階）',kana:'てんしゅ さんがい',text:'最上階。城主の井伊家の当主が登ることはまれで、ふだんは番士が城下と湖の様子を見張りました。晴れた日には湖の向こうに比良の山々、東には佐和山が見えます。',meta:[['眺め','琵琶湖・佐和山・城下']]}]};
 const TF0={modern:{name:'附櫓・多聞櫓（天守入口）',kana:'つけやぐら・たもんやぐら',text:'天守の東に付く附櫓（つけやぐら）と、そこから折れ曲がって続く多聞櫓。天守とともに国宝です。入口から狭い通路を抜け、急な階段を上って天守の1階に入ります。',meta:[['文化財','国宝（天守・附櫓・多聞櫓）'],['この先','天守 1階']]},
   edo:{name:'附櫓（天守入口）',kana:'つけやぐら',text:'天守の東の附櫓。ここで番士が出入りを改めました。奥の階段を上ると天守の1階です。',meta:[['この先','天守 1階']]}};
-for(const era of ['modern','edo']){ const T=TEN[era]=planTenshu({par:era==='modern'?GM:GE,cx:HK.cx,cz:HK.cz,g0:HK.g0,bw:HK.bw,bd:HK.bd,bh:HK.bh,bat:HK.bat,oh:HK.oh,entZ:0,ext:HK_EXT(),floors:TFLOORS[era].map(f=>Object.assign({},f)),f0:Object.assign({},TF0[era]),
+for(const era of ['modern','edo']){ const T=TEN[era]=planTenshu({par:era==='modern'?GM:GE,cx:HK.cx,cz:HK.cz,g0:HK.g0,bw:HK.bw,bd:HK.bd,bh:HK.bh,bat:HK.bat,oh:HK.oh,entZ:3,ext:HK_EXT(),floors:TFLOORS[era].map(f=>Object.assign({},f)),f0:Object.assign({},TF0[era]),
     mat:{wall:'inWall',floor:'floor',ceil:'darkwood',stone:'plank',rail:'darkwood',post:'darkwood',eaveRoof:'roof'},sign:signTex('天守入口')}); }
 B=BS;
 { const T=TEN.modern,cx=T.cx,cz=T.cz,yB=T.g0+T.bh;
@@ -2655,7 +2655,7 @@ const SPOTS=[
    text:'1606年（慶長11年）ごろに完成した三重三階の天守で、江戸時代から残る「現存12天守」のひとつ。国宝です。高さは約15.5mと小ぶりですが、切妻・入母屋・唐破風を組み合わせた18もの破風、2・3階の花頭窓（かとうまど）、3階をめぐる飾りの高欄など、変化に富んだ優美な外観が特徴です。解体修理の調査で、大津城の天守を移して建て直したという言い伝えが、ほぼ正しいことがわかりました。',
    meta:[['完成','1606年（慶長11年）ごろ'],['構造','三重三階・附櫓と多聞櫓つき'],['文化財','国宝'],['高さ','約15.5m（石垣を除く）']],
    edo:{text:'井伊家35万石の居城の象徴。徳川家康の命で、大坂の豊臣方や西国の大名に備える拠点として築かれました。天守は大津城から移したと伝わり、破風と花頭窓を多用した外観は、江戸時代の人々にとっても誇りでした。',meta:[['城主','井伊家（譜代大名筆頭）'],['築城','1604年着工・1622年ごろ完成']]}},
-  {id:'iriguchi',name:'天守入口（附櫓・多聞櫓）',kana:'つけやぐら・たもんやぐら',at:[16,-38],pos:[20.5,-38],look:[12,38.5,-38],q:'Hikone Castle tsukeyagura',
+  {id:'iriguchi',name:'天守入口（附櫓・多聞櫓）',kana:'つけやぐら・たもんやぐら',at:[16,-35],pos:[20.5,-35],look:[12,38.5,-35],q:'Hikone Castle tsukeyagura',
    text:'天守の東に付く附櫓と、そこから南へ折れて続く多聞櫓。天守とともに国宝です。附櫓の戸口から入り、狭い通路の奥の急な階段（傾きはおよそ62度）を上って天守の1階へ進みます。',meta:[['入口','附櫓の東の戸口'],['注意','天守の中の階段はとても急']]},
   {id:'horikiri',name:'大堀切と廊下橋',kana:'おおほりきり・ろうかばし',at:[-16,69],pos:[-24,69],look:[0,32,64],q:'Hikone castle horikiri rokabashi',
    text:'尾根を人工的に断ち切った空堀「大堀切」。表門と大手門のどちらから登っても、まずこの堀の底に着くように道がつくられています。頭上に架かる廊下橋は、いざというときに落として本丸側を孤立させ、守りを固める仕掛けでした。江戸時代は屋根と壁のある廊下橋でした。',
@@ -2673,7 +2673,7 @@ const SPOTS=[
    text:'西の丸の北西の隅に建つ三重櫓で、重要文化財。城の裏手（搦手）を守る要で、外側には深い大堀切と出曲輪があります。くの字に折れて続く続櫓が付いています。西の丸は春には桜の名所です。',meta:[['文化財','重要文化財'],['守る所','城の裏手（搦手）']]},
   {id:'tsukimi',name:'着見台',kana:'つきみだい',at:[30,3],pos:[31,2],look:[400,24,90],
    text:'本丸の東南の隅。江戸時代には「着見櫓（つきみやぐら）」が建ち、城下や佐和口の様子を見張りました。いまは見晴らし台になっていて、城下町と、東の佐和山（石田三成の佐和山城の跡）が見渡せます。',meta:[['眺め','城下町・佐和山'],['江戸時代','着見櫓が建っていた']],
-   edo:{name:'着見櫓',kana:'つきみやぐら',text:'本丸の東南の隅の二重櫓。城下へ入ってくる人や、佐和口・表門の様子を見張りました。',meta:[['役目','見張り']]}},
+   edo:{name:'着見櫓',kana:'つきみやぐら',pos:[18,-8],look:[29,40,3],text:'本丸の東南の隅の二重櫓。城下へ入ってくる人や、佐和口・表門の様子を見張りました。',meta:[['役目','見張り']]}},
   {id:'omote',name:'表門山道と表門橋',kana:'おもてもん',at:[110,70],pos:[112,70],look:[78,14,70],q:'Hikone castle Omotemon bridge',
    text:'表門橋を渡り、表門の跡から石段の山道を登ると大堀切の底に出ます。いまの観光のおもな入口で、門の跡の近くに券売所があります。江戸時代は、ここに櫓門の表門が建っていました。',meta:[['いま','観光の入口・券売所'],['この先','大堀切・天秤櫓']],
    edo:{name:'表門',kana:'おもてもん',pos:[134,70],look:[117,5,70],text:'表御殿へ通じる表門。登城する藩士はここから山道を登りました。櫓門の上は武具をしまう倉にもなっていました。',meta:[['つくり','櫓門と枡形']]}},
@@ -3260,7 +3260,7 @@ function rpS(R,spr,x,z,h,o,w,d,mat){ const y=standAt(R.era==='modern'?GM:GE,R.ox
   /* キャッスルロードの店 */ { const R=D.shop; rp(R,'jar',-2.7,1.8,-2,{s:.7}); rp(R,'box_s',-2.7,1.8,0,{}); rp(R,'chawan',2,.9,-1.8,{s:1.2}); rp(R,'vase',2.6,.9,-1.6,{s:.8}); }
   rp(D.rakuraku,'ikebana',-2.4,.2,-3.6); }
 /* 天守の中（江戸時代）: 番士 */
-{ const T=TEN.edo,F=T.FL,cx=T.cx,cz=T.cz; for(const [i,s,x,z,nm,say] of [[1,'ashigaru',4,2.5,'天守の番士','この隠狭間の壁は、いざとなれば内から突き破って鉄砲を撃つのじゃ。'],[2,'yari_a',-3,1.2,'番士','破風の間から、湖の舟を見張っておる。'],[3,'samurai_a',2,-1.6,'物見の侍','湖の向こうに比良の山、東には佐和山が見えるであろう。']]){ const f=F[i],it=decoRoomT.add(s,cx+x,f.y,cz+z,{}); if(it){ coll(f,cx+x-.4,cx+x+.4,cz+z-.4,cz+z+.4); TALK.push({it,name:nm,say,era:'edo'}); } } }
+{ const T=TEN.edo,F=T.FL,cx=T.cx,cz=T.cz; for(const [i,s,x,z,nm,say] of [[1,'ashigaru',6,-3,'天守の番士','この隠狭間の壁は、いざとなれば内から突き破って鉄砲を撃つのじゃ。'],[2,'yari_a',6,1,'番士','破風の間から、湖の舟を見張っておる。'],[3,'samurai_a',2,-1.6,'物見の侍','湖の向こうに比良の山、東には佐和山が見えるであろう。']]){ const f=F[i],it=decoRoomT.add(s,cx+x,f.y,cz+z,{}); if(it){ coll(f,cx+x-.4,cx+x+.4,cz+z-.4,cz+z+.4); TALK.push({it,name:nm,say,era:'edo'}); } } }
 
 /* 毎フレームの人物・煙の更新 */
 function updateChars(dt){ updateNPC(dt); FX.update(dt); const T=TIMES[timeIdx],inside=P.room||P.level>=0; sprTint(inside?1:T.night>.5?.45:timeIdx===2?.88:timeIdx===0?.95:1); }

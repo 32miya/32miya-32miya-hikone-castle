@@ -209,6 +209,7 @@ body.touchui #poi{bottom:calc(env(safe-area-inset-bottom,0px) + 234px);max-width
 <div id="err" hidden>この端末では3D表示を開始できませんでした。<br>WebGLに対応したブラウザで開いてください。</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="/oshiro/common/edo_deco.js"></script>
 <script>/* three.js r128 examples (MIT): postprocessing */
 ( function () {
 
@@ -2739,11 +2740,11 @@ B=BE;
 /* 表御殿の大広間（表向） */
 { const R=RD.ohiroma=mkRoom(Object.assign({era:'edo'},doorAt(99,96.4,0,-1),roomTxt('表御殿 大広間','おもてごてん おおひろま','藩の政治と儀式の場「表向（おもてむき）」の中心となる大広間。正月の祝いや家臣の拝謁はここで行われました。奥の一段高い上段の間に藩主が座り、家臣は身分に応じて座る位置が決まっていました。',[['使い方','儀式・拝謁'],['いま','彦根城博物館として外観を復元']])));
   const w=30,d=16,h=4.6; shell(R,w,d,h,{floor:'tatami',ftile:1.8,wall:'tl_w_matsu',front:'shoji',ceil:'ceilTachi',ctile:2.4,door:2.4,doorH:2.6,lamps:4}); pillarsRow(R,'woodGrain',w,d,h,3.6,false); nageshi(R,'woodGrain',w,d,2.8);
-  fusumaWall(R,w,d,2.75,3.6,['fsPine','fsGenkyu','fsTsuru','fsBiwako']); ranmaRow(R,w,d,3,4.1,3.6,['ranma3','ranma1','ranma7']);
+  fusumaWall(R,w,d,2.75,3.6,['fsPine','fsGenkyu','fsTsuru','fsBiwako']); ranmaRow(R,w,d,3,4.1,3.6,['rm_shiraki_hanabishi','rm_ryu_kinbuchi','rm_shiraki_matsu','rm_kinji_tsuru']);
   rb(R,'tatami',-w/2+.2,w/2-.2,0,.4,-d/2+.2,-d/2+4.6,true,1.8); rb(R,'lacquer',-w/2+.2,w/2-.2,.33,.4,-d/2+4.55,-d/2+4.65); tokonoma(R,-3,-d/2+.2,4,1.2,3); chigaidana(R,2,-d/2+.2,2.6,.9); }
 /* 御座之間（藩主の居間・書院） */
 { const R=RD.goza=mkRoom(Object.assign({era:'edo'},doorAt(79.6,150,-1,0),roomTxt('御座之間','ござのま','藩主がふだん政務をとった書院。床の間・違い棚・付書院をそなえた書院造で、襖には水墨の山水が描かれていました。',[['つくり','書院造'],['使い方','藩主の政務']])));
-  R.exitDir='z'; const w=12,d=9,h=3.6; shell(R,w,d,h,{floor:'tatami',ftile:1.8,wall:'suiboku',front:'shoji',ceil:'tl_c_wood',ctile:2.4,door:1.8,lamps:3}); pillarsRow(R,'woodGrain',w,d,h,3,false); nageshi(R,'woodGrain',w,d,2.4); fusumaWall(R,w,d,2.35,3,['fsBiwako','fsTake','fsPine']);
+  R.exitDir='z'; const w=12,d=9,h=3.6; shell(R,w,d,h,{floor:'tatami',ftile:1.8,wall:'suiboku',front:'shoji',ceil:'tl_c_wood',ctile:2.4,door:1.8,lamps:3}); pillarsRow(R,'woodGrain',w,d,h,3,false); nageshi(R,'woodGrain',w,d,2.4); fusumaWall(R,w,d,2.35,3,['fsBiwako','fsTake','fsPine']); ranmaRow(R,w,d,2.55,3.35,3,['rm_shiraki_sakura','rm_shiraki_matsu']);
   tokonoma(R,-2.5,-d/2+.2,3,1,2.6); chigaidana(R,1.4,-d/2+.2,2,.8); rb(R,'woodGrain',w/2-1,w/2-.2,.6,.75,-2,1,true); rb(R,'shoji',w/2-.25,w/2-.2,.75,2.2,-2,1); }
 /* 馬屋 */
 { const R=RD.umayaE=mkRoom(Object.assign({era:'edo'},doorAt(250,101.2,0,1),roomTxt('馬屋の中','うまや','藩主や重臣の馬を飼った厩（うまや）。土間に沿って21頭分の馬立場（うまたてば）が並び、板で仕切られています。馬番が世話をし、登城のときに馬を用意しました。',[['馬立場','21頭分'],['文化財','重要文化財']])));
@@ -2762,8 +2763,8 @@ B=BE;
   rb(R,'tatami',-.9,w/2,0,.45,-d/2,d/2-.8,true,1.8); rb(R,'darkwood',-1,-.9,0,.47,-d/2,d/2-.8); rg(R,'darkwood',new THREE.BoxGeometry(1.6,.5,.06),1.2,.72,d/2-1.6); rb(R,'woodGrain',2.6,3.1,.45,2.3,-1.4,1,true); rb(R,'stone',-3,-1.4,0,.8,-d/2+.3,-d/2+1.6,true); }
 /* 家老屋敷の書院 */
 { const D=BUKE.reduce((a,b)=>Math.hypot(b.hx-56,b.hz-243)<Math.hypot(a.hx-56,a.hz-243)?b:a); const R=RD.karo=mkRoom(Object.assign({era:'edo'},doorAt(D.hx,D.hz-D.hd/2-.55,0,-1),roomTxt('家老屋敷の書院','かろうやしき','二の丸には、木俣・庵原・長野などの家老や重臣の屋敷が並びました。長屋門をくぐると玄関があり、奥に客を迎える書院がありました。',[['住んだ人','家老・重臣'],['つくり','長屋門・書院']])));
-  const w=12,d=9,h=3.4; shell(R,w,d,h,{floor:'tatami',ftile:1.8,wall:'tl_w_sansui',front:'shoji',ceil:'tl_c_wood',ctile:2.4,door:1.8,lamps:3}); pillarsRow(R,'darkwood',w,d,h,3,false); nageshi(R,'darkwood',w,d,2.3); fusumaWall(R,w,d,2.25,3,['fsTake','fsPine','tl_f_sansui']);
-  tokonoma(R,-2.5,-d/2+.2,3,1,2.5); chigaidana(R,1.4,-d/2+.2,2,.8); armor({y:R.y,boxes:R.boxes},R.ox+4.6,R.oz-2.6,-Math.PI/2,'#a52a1c','#c79f45'); }
+  const w=12,d=9,h=3.4; shell(R,w,d,h,{floor:'tatami',ftile:1.8,wall:'tl_w_sansui',front:'shoji',ceil:'tl_c_wood',ctile:2.4,door:1.8,lamps:3}); pillarsRow(R,'darkwood',w,d,h,3,false); nageshi(R,'darkwood',w,d,2.3); fusumaWall(R,w,d,2.25,3,['fsTake','fsPine','tl_f_sansui']); ranmaRow(R,w,d,2.45,3.2,3,['rm_shiraki_ogi','rm_shiraki_mon']);
+  tokonoma(R,-2.5,-d/2+.2,3,1,2.5); chigaidana(R,1.4,-d/2+.2,2,.8); if(!window.EdoDeco) armor({y:R.y,boxes:R.boxes},R.ox+4.6,R.oz-2.6,-Math.PI/2,'#a52a1c','#c79f45'); }
 /* 佐和口多聞櫓（武具蔵） */
 { const R=RD.sawaE=mkRoom(Object.assign({era:'edo'},doorAt(321.4,76,-1,0),roomTxt('佐和口多聞櫓の中','さわぐち たもんやぐら','中堀に面した長い多聞櫓は、ふだんは武具や兵糧をしまう倉。堀に向かって三角と四角の狭間（さま）が交互に並び、いざというときは鉄砲と弓で中堀を守りました。',[['狭間','三角（鉄砲）と四角（弓）'],['守る所','佐和口・中堀']])));
   R.exitDir='z'; const w=7,d=26,h=3.2; shell(R,w,d,h,{floor:'floor',wall:'plank',front:'plank',ceil:'darkwood',door:1.8,doorMat:'woodGrain',lamps:3});
@@ -2771,7 +2772,7 @@ B=BE;
   for(let k=0;k<4;k++){ rb(R,'darkwood',-w/2+.2,-w/2+.6,.4,.5,-d/2+2+k*5,-d/2+5.5+k*5,true); for(let j=0;j<6;j++) rg(R,'black',new THREE.CylinderGeometry(.04,.05,1.4,6),-w/2+.45,1.2,-d/2+2.3+k*5+j*.5,0); } }
 /* 槻御殿の書院 */
 { const R=RD.tsuki=mkRoom(Object.assign({era:'edo'},doorAt(214,-190.7,0,1),roomTxt('槻御殿（楽々園）','けやきごてん','4代藩主・井伊直興が建てた下屋敷。藩主が隠居したり、くつろいだりする御殿で、北どなりの玄宮園の庭を眺められました。直弼もここで生まれています。',[['建てた人','井伊直興（1677年ごろ）'],['ゆかり','井伊直弼の生まれた所']])));
-  const w=14,d=9,h=3.4; shell(R,w,d,h,{floor:'tatami',ftile:1.8,wall:'hanaF',front:'shoji',ceil:'ceilTachi',ctile:2.4,door:1.8,lamps:3}); pillarsRow(R,'woodGrain',w,d,h,3.5,false); nageshi(R,'woodGrain',w,d,2.4); fusumaWall(R,w,d,2.35,3.5,['fsSakura','fsGenkyu','fsTsuru']);
+  const w=14,d=9,h=3.4; shell(R,w,d,h,{floor:'tatami',ftile:1.8,wall:'hanaF',front:'shoji',ceil:'ceilTachi',ctile:2.4,door:1.8,lamps:3}); pillarsRow(R,'woodGrain',w,d,h,3.5,false); nageshi(R,'woodGrain',w,d,2.4); fusumaWall(R,w,d,2.35,3.5,['fsSakura','fsGenkyu','fsTsuru']); ranmaRow(R,w,d,2.55,3.25,3.5,['rm_shiraki_fuji','rm_shiraki_tsuru','rm_shiraki_hanabishi']);
   tokonoma(R,-3,-d/2+.2,3,1,2.5); chigaidana(R,1,-d/2+.2,2.2,.8); }
 /* ---------- 現代 ---------- */
 B=BM;
@@ -2779,7 +2780,7 @@ B=BM;
 { const R=RD.museum=mkRoom(Object.assign({era:'modern'},doorAt(114,84.4,0,-1),roomTxt('彦根城博物館 展示室','ひこねじょう はくぶつかん','表御殿を復元した博物館。井伊家に伝わる美術工芸品や古文書を収め、朱色にそろえた「井伊の赤備え」の甲冑、能面・能装束、茶道具などを展示しています。奥には木造で復元した藩主の居間と、江戸時代の能舞台が残ります。',[['収蔵','井伊家伝来の品々'],['見どころ','赤備えの甲冑・能面・能舞台']])));
   const w=20,d=14,h=4; shell(R,w,d,h,{floor:'floor',wall:'mDark',front:'glass',ceil:'black',door:2.4,doorH:2.6,lamps:0});
   for(const sz of [-1]){ const z=sz*(d/2-1.1); glassCase({y:R.y,boxes:R.boxes},R.ox,R.oz+z,w-4,1.1,1.8,0,.6); }
-  for(const [x,z] of [[-6,-1],[-2,-1],[2,-1],[6,-1]]){ armor({y:R.y,boxes:R.boxes},R.ox+x,R.oz+z,0,'#b8231a','#6e1710'); }
+  if(!window.EdoDeco) for(const [x,z] of [[-6,-1],[-2,-1],[2,-1],[6,-1]]){ armor({y:R.y,boxes:R.boxes},R.ox+x,R.oz+z,0,'#b8231a','#6e1710'); }
   for(const sx of [-1,1]){ glassCase({y:R.y,boxes:R.boxes},R.ox+sx*(w/2-1),R.oz+2.5,1,3.6,1.4,Math.PI/2,.8); }
   for(let x=-8;x<=8;x+=4) rg(R,'lampIn',new THREE.BoxGeometry(.3,.12,.3),x,h-.2,-d/2+1.4); rg(R,'lampIn',new THREE.BoxGeometry(.3,.12,.3),0,h-.2,1); R.light=.8;
   /* 中央の低い覗きケース（刀剣）と、壁の解説パネル */ glassCase({y:R.y,boxes:R.boxes},R.ox,R.oz+3,7,1,1.1,0,.75); for(const x of [-7.6,-3.6,3.6,7.6]) rg(R,'hall',new THREE.BoxGeometry(1.4,1,.04),x,1.6,d/2-.06); }
@@ -2794,7 +2795,7 @@ RD.umayaM=mkRoom(Object.assign({era:'modern'},doorAt(250,101.2,0,1),roomTxt('馬
   const w=6.4,d=11,h=3.6; shell(R,w,d,h,{floor:'tileF',wall:'tsuchi',front:'woodGrain',ceil:'woodGrain',door:1.6,doorX:-2,doorMat:'noren',lamps:3});
   rb(R,'woodGrain',-w/2+.3,-w/2+1.1,0,1.8,-d/2+1,d/2-2,true); rb(R,'woodGrain',1,w/2-.3,0,.9,-2.5,-1,true); rb(R,'glass',1,w/2-.3,.9,1.4,-2.5,-1); rb(R,'woodGrain',-1,1.6,0,.8,1.5,3.5,true); }
 { const R=RD.rakuraku=mkRoom(Object.assign({era:'modern'},doorAt(220,-189.4,0,1),roomTxt('楽々園（地震の間）','らくらくえん','槻御殿の一部が残る建物。地震に備えて建てた「地震の間」や、楽々の間などが残り、玄宮園とともに名勝に指定されています（建物の内部は通常非公開）。',[['文化財','名勝 玄宮楽々園'],['公開','建物の内部は通常非公開']])));
-  const w=10,d=8,h=3.2; shell(R,w,d,h,{floor:'tatami',ftile:1.8,wall:'tl_w_sansui',front:'shoji',ceil:'tl_c_wood',ctile:2.4,door:1.8,lamps:2}); pillarsRow(R,'darkwood',w,d,h,2.6,false); nageshi(R,'darkwood',w,d,2.2); }
+  const w=10,d=8,h=3.2; shell(R,w,d,h,{floor:'tatami',ftile:1.8,wall:'tl_w_sansui',front:'shoji',ceil:'tl_c_wood',ctile:2.4,door:1.8,lamps:2}); pillarsRow(R,'darkwood',w,d,h,2.6,false); nageshi(R,'darkwood',w,d,2.2); ranmaRow(R,w,d,2.35,3.05,2.6,['rm_shiraki_hanabishi','rm_shiraki_sakura']); }
 B=BS;
 
 /* ---------- spots & areas ---------- */
@@ -3307,7 +3308,12 @@ class Crowd{ constructor(par,max,shadows){ this.par=par; this.max=max||400; this
   setOn(it,v){ if(it.hidden||it.off===!v) return; it.off=!v; it.p.A.size.setXY(it.i,v?(it.flip?-it.w:it.w):0,v?it.h:0); it.p.A.size.needsUpdate=true; }
   hide(it){ if(it.bk) this.hide(it.bk); it.hidden=true; it.p.A.size.setXY(it.i,0,0); it.p.A.size.needsUpdate=true; if(it.si>=0){ this.sh.setMatrixAt(it.si,TM(0,-999,0)); this.sh.instanceMatrix.needsUpdate=true; } }
   set visible(v){ for(const p of this.pages) p.mesh.visible=v; if(this.sh) this.sh.visible=v; } }
-function sprTint(v){ for(const m of _sprMats) m.color.setScalar(v); }
+function sprTint(v){ for(const m of _sprMats) m.color.setScalar(v); if(EDO) EDO.tint(v); }
+/* お城さんぽ共通の江戸の調度品・具足・欄間・建物（/oshiro/common/edo_deco.js と deco_edo.webp）。
+   アトラスにない名前（gk_… rm_… i_… e_…）は、rp() や orn() からこちらで置く。読み込めないときは何も置かない */
+const EDO=window.EdoDeco?EdoDeco.init(THREE):null;
+function edoInfo(n){ const s=EDO&&EDO.size(n); return s?{edo:true,h:s.h,aspect:s.w/s.h}:null; }
+function edoPut(par,name,x,y,z,o){ if(!EDO||!EDO.size(name)) return null; const ms=EDO.put(par,name,x,y,z,o); if(!ms) return null; const u=ms.userData.edo; return {x,y,z,w:u.w,h:u.h,name,mesh:ms}; }
 
 /* ---------- 煙・炎・閃光（パーティクル） ---------- */
 const FX=(()=>{ const N=2400,pos=new Float32Array(N*3),col=new Float32Array(N*4),sz=new Float32Array(N),life=new Float32Array(N),vel=new Float32Array(N*3),kind=new Uint8Array(N),grow=new Float32Array(N),max=new Float32Array(N); let head=0;
@@ -3398,9 +3404,23 @@ function updateNPC(dt){ if(!GNPC.visible||!GE.visible) return; const rx=Math.cos
 
 /* ---------- 室内と天守の調度品・人物 ---------- */
 const decoRoomT=new Crowd(GE,300,true),decoRoomM=new Crowd(GM,200,true);
-function rp(R,spr,x,y,z,o,solid,talk){ const C=R.era==='modern'?decoRoomM:decoRoomT; const it=C.add(spr,R.ox+x,R.y+y,R.oz+z,o); if(it&&solid){ const w=Math.max(.5,it.w*.4); R.boxes.push({x0:R.ox+x-w,x1:R.ox+x+w,z0:R.oz+z-.45,z1:R.oz+z+.45}); } if(it&&talk) TALK.push({it,name:talk[0],say:talk[1],era:R.era}); return it; }
+function rp(R,spr,x,y,z,o,solid,talk){ const C=R.era==='modern'?decoRoomM:decoRoomT; const it=C.add(spr,R.ox+x,R.y+y,R.oz+z,o)||edoPut(R.era==='modern'?GM:GE,spr,R.ox+x,R.y+y,R.oz+z,o); if(it&&solid){ const w=Math.max(.5,it.w*.4); R.boxes.push({x0:R.ox+x-w,x1:R.ox+x+w,z0:R.oz+z-.45,z1:R.oz+z+.45}); } if(it&&talk) TALK.push({it,name:talk[0],say:talk[1],era:R.era}); return it; }
 function standAt(par,x,y0,z,h,w,d,mat){ const m=mesh(new THREE.BoxGeometry(w||.7,h,d||.5),M[mat||'lacquer']); m.position.set(x,y0+h/2,z); par.add(m); return y0+h; }
 function rpS(R,spr,x,z,h,o,w,d,mat){ const y=standAt(R.era==='modern'?GM:GE,R.ox+x,R.y,R.oz+z,h,w,d,mat); return rp(R,spr,x,y-R.y,z,o); }
+
+/* 入口の外の庭の小物（共通素材 deco_edo の石灯籠・井戸など）。歩ける地面で、まわりも空いている所にだけ置き、当たり判定を付ける */
+function edoYard(R,list){ if(!EDO||!R) return; const E=R.exitPos,ya=E[2],fx=-Math.sin(ya),fz=-Math.cos(ya),rx=Math.cos(ya),rz=-Math.sin(ya),par=R.era==='modern'?GM:GE;
+  withMode(R.era,()=>{ for(const [n,side,fwd] of list){ const x=E[0]+rx*side+fx*fwd,z=E[1]+rz*side+fz*fwd,s=EDO.size(n),r=Math.max(.6,s.w*.45);
+    let ok=true; for(const [dx,dz] of [[0,0],[r,0],[-r,0],[0,r],[0,-r]]) if(!walkable(x+dx,z+dz)) ok=false; if(!ok) continue;
+    if(edoPut(par,n,x,groundH(x,z)-.03,z,{})) block(x-r*.7,z-r*.5,x+r*.7,z+r*.5,'castle'); } }); }
+/* お城さんぽ共通の調度品・具足（/oshiro/common/edo_deco.js）。彦根は書院造（表御殿・御座之間・槻御殿）の素木の欄間と、井伊家の赤備え */
+{ const D=RD;
+  if(D.museum&&EDO) [[-6,'gk_buke1'],[-2,'gk_toko3'],[2,'gk_buke1'],[6,'gk_toko3']].forEach(([x,n],i)=>rp(D.museum,n,x,0,-1,{flip:i>1},true,['展示：朱塗りの具足（赤備え）','井伊家の軍勢は、具足から旗指物まで朱で統一した「赤備え」。徳川四天王の井伊直政から受け継がれました。']));
+  rp(D.ohiroma,'gk_toko3',11,.4,-6.6,{},true,['飾り具足','上段の脇に飾られた朱の具足。井伊家の赤備えを伝えます。']); rp(D.ohiroma,'i_toro_kin',-7,.4,-6.9);
+  rp(D.goza,'i_kake_take',-2.5,.62,-4.24,{yaw:0}); rp(D.goza,'i_tetsubin',-.4,0,-1.2);
+  rp(D.tsuki,'i_kake_fuji',-3,.62,-4.24,{yaw:0}); rp(D.tsuki,'i_ikebana',-2,.2,-3.85); rp(D.tsuki,'i_bonbori',5.8,0,-3.7); rp(D.tsuki,'i_bonbori',-5.8,0,-3.7);
+  rp(D.karo,'i_kake_tsuru',-2.5,.62,-4.24,{yaw:0}); rp(D.ohiroma,'i_kake_fuji',-3,.62,-7.74,{yaw:0}); rp(D.karo,'gk_buke1',4.8,0,-3,{},true,['具足','家老の家に伝わる朱の具足。井伊家の家臣も赤備えでした。']); rp(D.karo,'i_katanakake',-5,0,-3.9,{yaw:0}); rp(D.karo,'i_andon',4.8,0,1.6);
+  edoYard(D.karo,[['e_ido',-3.4,1.2],['e_ishidoro',3.2,1]]); edoYard(D.tsuki,[['e_ishidoro',-3.4,1],['e_niwa_ishi',3.8,1.6]]); for(const e of ['edo','modern']) if(D['umore_'+e]) rp(D['umore_'+e],'i_kake_ume',-2.4,.62,-3.74,{yaw:0}); }
 { const D=RD;
   /* 大広間: 上段に藩主、下段に家臣 */ rp(D.ohiroma,'lord_purple',-3,.4,-5.2,{},true,['彦根藩主・井伊家の当主','面を上げよ。井伊の家は代々、徳川家の先鋒を務めてまいった。']);
   for(const [s,x,z,nm,say,fl] of [['sam_haori',-8,0,'家老','殿、本日の拝謁の者どもが控えております。'],['samurai_a',-3,1.5,'藩士','国元の村々の様子をご報告にまいりました。'],['samurai_b',3,1.5,'藩士','（静かに控えている）',1],['sam_kami',8,0,'近習','殿の御前じゃ。お静かに。',1],['w_samurai',-10,4.5,'藩士','（静かに控えている）'],['sam_armor',10,4.5,'赤備えの侍','井伊の赤備えは、戦場でいちばん先に駆ける隊じゃ。',1]]) rp(D.ohiroma,s,x,0,z,{flip:!!fl},true,[nm,say]);
@@ -3441,11 +3461,11 @@ function tapHit(it,sx,sy,maxD){ _pv.set(it.x,it.y,it.z); const d=_pv.distanceTo(
 /* ---------- 門・唐破風・御殿の彫刻と金具（切り抜き画像を壁に貼る） ---------- */
 { const crowds=new Map(),wp=new THREE.Vector3(),wq=new THREE.Quaternion(),we=new THREE.Euler();
   const rootOf=g=>{ let r=g; while(r.parent&&r.parent!==scene) r=r.parent; return r; };
-  for(const o of ORN){ const I=sprInfo(o.spr); if(!I) continue; let x=o.x,y=o.y,z=o.z,yaw=o.yaw,root=o.root||GE;
+  for(const o of ORN){ const I=sprInfo(o.spr)||edoInfo(o.spr); if(!I) continue; let x=o.x,y=o.y,z=o.z,yaw=o.yaw,root=o.root||GE;
     if(o.g){ o.g.updateWorldMatrix(true,false); wp.set(o.x,o.y,o.z); o.g.localToWorld(wp); x=wp.x; y=wp.y; z=wp.z; o.g.getWorldQuaternion(wq); we.setFromQuaternion(wq,'YXZ'); yaw+=we.y; root=rootOf(o.g); }
     let h=typeof o.size==='number'?o.size:(o.size.w/I.aspect); if(o.size&&o.size.hmax&&h>o.size.hmax) h=o.size.hmax;
     let C=crowds.get(root); if(!C){ C=new Crowd(root,900,false); crowds.set(root,C); }
-    const top=o.spr.startsWith('kg_')||o.spr==='pillar_k'; C.add(o.spr,x,top?y:y-h/2,z,{yaw,s:h/I.h}); } }
+    const top=o.spr.startsWith('kg_')||o.spr==='pillar_k'; if(I.edo) edoPut(root,o.spr,x,top?y:y-h/2,z,{yaw,h,flip:!!(o.size&&o.size.flip)}); else C.add(o.spr,x,top?y:y-h/2,z,{yaw,s:h/I.h}); } }
 window.__npc={NPCS,npcCrowd,GNPC}; window.__decoT=decoT; window.__decoRoom={T:decoRoomT,M:decoRoomM};
 
 

@@ -2922,6 +2922,9 @@ const SPOTS=[
   {id:'naiko',edoOnly:true,name:'松原内湖',kana:'まつばらないこ',at:[46,-420],pos:[46,-404],look:[46,0,-560],
    text:'城の北に広がっていた内湖。城は琵琶湖と内湖に三方を囲まれた「水の城」でした。内湖は昭和の干拓で陸地になり、いまは残っていません。',meta:[['いま','干拓されて陸地']]}
 ];
+/* お城さんぽ共通（/oshiro/common/fuda.js の見どころ札・写真モード）へ、名所と自分の位置を知らせる窓口 */
+window.OshiroGame={ spots:()=>spotList(), all:()=>SPOTS, me:()=>({x:P.x,z:P.z,level:P.level,room:!!P.room,walk:P.mode==='walk',tour:typeof tour!=='undefined'&&!!tour.on}), started:()=>typeof started==='undefined'||!!started, warpAt:0 };
+{ const _tp=teleport; teleport=function(s){ window.OshiroGame.warpAt=performance.now(); return _tp.apply(this,arguments); }; }
 function spotList(){ return SPOTS.filter(s=>MODE==='edo'?!s.modernOnly:!s.edoOnly).map(s=>MODE==='edo'&&s.edo?Object.assign({},s,s.edo):s); }
 function areaAt(x,z){ const e=MODE==='edo';
   for(const b of actB()) if(inR(b,x,z,.2)) return b.name;
@@ -3642,6 +3645,7 @@ window.__oc={spotList:()=>spotList(),stepOK:(x,z)=>stepOK(x,z),dbgBlock:(x,z,m)=
 })();
 </script>
 <script src="/oshiro/common/goshuin.js"></script>
+<script src="/oshiro/common/fuda.js"></script>
 <!-- oshiro-portal:end -->
 </body>
 </html>

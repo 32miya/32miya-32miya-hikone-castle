@@ -1511,7 +1511,10 @@ const RAMPS=[
   {id:'yama2',x0:-48,x1:-30,z0:-170,z1:-162,a:'x',f:-30,t:-48,h0:21,h1:8,name:'山崎曲輪への石段'},
   {id:'kuro1',x0:30,x1:58,z0:-110,z1:-102,a:'x',f:30,t:58,h0:34,h1:18,name:'黒門への石段'},
   {id:'kuro2',x0:58,x1:66,z0:-94,z1:-66,a:'z',f:-94,t:-66,h0:18,h1:0,name:'黒門への石段'},
-  {id:'yamagate',x0:-70,x1:-62,z0:-230,z1:-214,a:'z',f:-214,t:-230,h0:8,h1:0,name:'山崎門の坂'}];
+  {id:'yamagate',x0:-70,x1:-62,z0:-230,z1:-214,a:'z',f:-214,t:-230,h0:8,h1:0,name:'山崎門の坂'},
+  /* 山崎曲輪から出曲輪へ上る石段と、出曲輪から大堀切の底へ下りる石段（出曲輪と大堀切へ歩いて行けるように） */
+  {id:'dek1',x0:-86,x1:-80,z0:-168,z1:-146,a:'z',f:-168,t:-146,h0:8,h1:28,name:'出曲輪への石段'},
+  {id:'dek2',x0:-78,x1:-64,z0:-120,z1:-114,a:'x',f:-64,t:-78,h0:24,h1:28,name:'大堀切への石段'}];
 function rampH(r,x,z){ const c=r.a==='x'?x:z,u=Math.max(0,Math.min(1,(c-r.f)/(r.t-r.f))); return r.h0+(r.h1-r.h0)*u; }
 /* 彦根山の自然の斜面（林）: 曲輪から下へ、およそ32°で下る */
 function hillRaw(x,z){ let h=0; for(const p of PLAT){ const top=p.H-p.wall-.62*rDist(p,x,z); if(top>h) h=top; } return h; }
@@ -2095,8 +2098,8 @@ function planTenshu(T){ const {cx,cz,g0,bh}=T; const yB=g0+bh; const FL=[],ST=[]
     FL.push(Object.assign(f,{y:L.Y+k*hh,h:hh,w:L.w,d:L.d,bal:L.bal||0,open:!!L.open,pillars:[]})); });
   /* 階段 */
   const L0=bh*1.35; if(T.noTunnel) ST.push({x0:1e5,x1:1e5+1,z0:1e5,z1:1e5+1,from:1e5,to:1e5+1}); else ST.push({x0:cx+.2,x1:cx+2.2,z0:zc-.6-L0,z1:zc-.6,from:zc-.6,to:zc-.6-L0});
-  for(let i=1;i<FL.length-1;i++){ const rise=FL[i+1].y-FL[i].y,L=Math.min(rise*1.3,Math.min(FL[i].d,FL[i+1].d)-3.6),sx=i%2?2.4:-4.4,up=i%2?-1:1;
-    const zs=cz-up*L/2, ze=cz+up*L/2; ST.push({x0:cx+sx,x1:cx+sx+2,z0:Math.min(zs,ze),z1:Math.max(zs,ze),from:zs,to:ze}); }
+  for(let i=1;i<FL.length-1;i++){ const rise=FL[i+1].y-FL[i].y,hb=Math.min(FL[i].d,FL[i+1].d)/2-.9,L=Math.max(1.6,Math.min(rise*1.15,2*hb-2.8)),sx=i%2?2.4:-4.4,up=i%2?-1:1;
+    /* 上り口は壁ぎわ、上りきった先に床が見えるように（階段の先が壁にならない） */ const zs=cz-up*(hb-1.0), ze=zs+up*L; ST.push({x0:cx+sx,x1:cx+sx+2,z0:Math.min(zs,ze),z1:Math.max(zs,ze),from:zs,to:ze}); }
   ST.forEach((s,i)=>s.rise=FL[i+1].y-FL[i].y);
   T.FL=FL; T.ST=ST; return T; }
 function buildTenshuInterior(T){ const {cx,cz,FL,ST}=T,MT=T.mat;
@@ -2605,7 +2608,7 @@ tamon(BS,-9.5,-5.6,12.6,26,3.4,33,{wall:'wallW',roof:'roof',gable:'plaster'}); b
 /* 西の丸三重櫓（重要文化財）: くの字に続く続櫓 */
 { const y=34; sanju(-32,-131,10,8.4,y,{base:0}); tamon(BS,-27,-6,-139.5,-135.5,3.4,y,{wall:'wallW',roof:'roof',gable:'plaster'}); block(-27,-139.5,-6,-135.5,'castle'); tamon(BS,-39.5,-35.5,-126,-104,3.4,y,{wall:'wallW',roof:'roof',gable:'plaster'}); block(-39.5,-126,-35.5,-104,'castle'); }
 /* 登り石垣: 山の斜面を登る石垣で、斜面を横へ回りこむ敵をふせぐ（鐘の丸の両わき） */
-{ const lines=[[[-32,128],[-52,172]],[[26,128],[70,176]],[[-40,-140],[-78,-208]]];
+{ const lines=[[[-32,128],[-52,172]],[[26,128],[70,176]],[[-40,-140],[-50,-158]]]; /* 西の丸側の登り石垣は斜面だけに（山崎曲輪の平地を横切らないように） */
   for(const [a,b2] of lines){ const L=Math.hypot(b2[0]-a[0],b2[1]-a[1]),n=Math.ceil(L/1.6),ry=Math.atan2(b2[0]-a[0],b2[1]-a[1]);
     for(let i=0;i<n;i++){ const t=(i+.5)/n,x=a[0]+(b2[0]-a[0])*t,z=a[1]+(b2[1]-a[1])*t,h=Math.max(hillH(x,z),platAt(x,z)?platAt(x,z).H:0),hh=2.6; BS.stone.add(boxUVGeo(1.7,hh+2,L/n+.08,3,3),TM(x,h-1+hh/2+.0,z,ry)); block(x-1.1,z-1.1,x+1.1,z+1.1,'castle'); } } }
 
@@ -3141,6 +3144,15 @@ function doorSpot(){ if(P.room){ const R=P.room; return Math.hypot(P.x-(R.exitZo
   else if(Math.hypot(P.x-(T.entry.X+2),P.z-T.entry.zc)<6||(T.annex&&Math.hypot(P.x-(T.annex.x1+1.5),P.z-T.annex.zc)<3.5&&Math.abs(groundH(P.x,P.z)-T.g0)<1)) return {name:'天守に入る',keep:true}; return null; }
 
 function roomOK(R,x,z){ return R.rects.some(r=>inR(r,x,z,0))&&!R.boxes.some(b=>inR(b,x,z,.25)); }
+/* 出口の向きの自動調整（お城さんぽ共通仕様）: 建物から外に出たとき、目の前が壁や塀にならないように、いちばん開けた方を向いて出る */
+setTimeout(()=>{ try{ const old=MODE; const clr=(x,z,a)=>{ const fx=-Math.sin(a),fz=-Math.cos(a); let d=.3; for(;d<=8;d+=.25){ if(!walkable(x+fx*d,z+fz*d)) break; } return d; };
+  const fix=E=>{ if(!E||Math.abs(E[0])>5000||Math.abs(E[1])>5000) return; let x=E[0],z=E[1];
+    if(!walkable(x,z)){ let best=null; for(let r=.5;r<=4&&!best;r+=.5) for(let k=0;k<16;k++){ const a=k/16*6.283,X=x+Math.sin(a)*r,Z=z+Math.cos(a)*r; if(!walkable(X,Z)) continue; const c=clr(X,Z,E[2]); if(!best||c>best[2]) best=[X,Z,c]; } if(best){ x=best[0]; z=best[1]; } }
+    let ba=E[2],bd=clr(x,z,E[2]); if(bd<2.6) for(let k=1;k<=8;k++) for(const s of [-1,1]){ const a=E[2]+s*k*Math.PI/8,d=clr(x,z,a)-k*.15; if(d>bd+.4){ bd=d; ba=a; } }
+    E[0]=x; E[1]=z; E[2]=ba; };
+  /* 塀や建物に囲まれた小さな隙間に出てしまう戸口は使わない（出たあと歩いて行けない） */
+  const pocket=E=>{ const seen=new Set(),q=[[Math.round(E[0]),Math.round(E[1])]]; seen.add(q[0]+''); while(q.length){ const [x,z]=q.pop(); for(const [a,b] of [[1,0],[-1,0],[0,1],[0,-1]]){ const X=x+a,Z=z+b,k=X+','+Z; if(seen.has(k)||!walkable(X+.1,Z+.1)) continue; seen.add(k); if(seen.size>160) return false; q.push([X,Z]); } } return true; };
+  for(const R of ROOMS){ if(R.era) MODE=R.era; fix(R.exitPos); if(R.extra) R.extra=R.extra.filter(e=>{ if(!e.exitPos) return true; fix(e.exitPos); return !pocket(e.exitPos); }); MODE=old; } }catch(e){ console.warn('exitfix',e); } },0);
 function enterRoom(R,ex){ P.exitVia=ex||R.exitPos; P.room=R; P.level=-1; P.x=R.spawn[0]; P.z=R.spawn[1]; P.yaw=R.spawn[2]; P.y=R.y+1.6; P.pitch=0; lastArea=''; showHint(R.name+'に入りました。出口へ向かうと外に出ます'); }
 function exitRoom(){ const R=P.room,E=P.exitVia||R.exitPos; P.room=null; P.x=E[0]; P.z=E[1]; P.yaw=E[2]; if(!walkable(P.x,P.z)){ const bx=P.x,bz=P.z; let f=false; for(let r=.5;r<=8&&!f;r+=.5) for(let k=0;k<24&&!f;k++){ const an=k/24*6.283,x=bx+Math.cos(an)*r,z=bz+Math.sin(an)*r; if(walkable(x,z)&&!ROOMS.some(Q=>Q.era===MODE&&inR(Q.zone,x,z,.4))){ P.x=x; P.z=z; f=true; } } } P.y=groundH(P.x,P.z)+1.6; lastArea=''; showHint('外に出ました'); }
 function lookAtSpot(s){ const dx=s.look[0]-s.pos[0],dz=s.look[2]-s.pos[1],dy=s.look[1]-1.6; P.yaw=Math.atan2(-dx,-dz); P.pitch=Math.max(-.3,Math.min(.35,Math.atan2(dy,Math.hypot(dx,dz)))); }
